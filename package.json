@@ -1,5 +1,5 @@
 {
-  "homepage": "http://refile-fydp.github.io",
+  "homepage": "https://refile-fydp.github.io",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.16.1",
