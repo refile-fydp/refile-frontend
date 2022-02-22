@@ -7,7 +7,7 @@ import ThreadList from './components/ThreadList';
 import AddNewFolder from './AddNewFolder';
 import QuickFilterList from './components/QuickFilterList';
 import AttachmentsTable from './components/AttachmentsTable';
-import Axios from 'axios';
+import axios from 'axios';
 import GetAttachmentsData from './GetAttachmentsData.json'
 import { Attachment } from './models/Attachment';
 import AttachmentModel from './models/AttachmentModel';
@@ -18,7 +18,19 @@ function LandingPage({setUserId}) {
 
   const [folderSelected, setFolderSelected] = useState();
   const [threadSelected, setThreadSelected] = useState();
-  var baseUrl = 'https://refile.herokuapp.com/';
+
+  var baseUrl = "";
+  switch(process.env.NODE_ENV) {
+    case 'production':
+      baseUrl = "https://api.refile.email"
+    default:
+      baseUrl = 'https://refile-dev.herokuapp.com'
+  }
+
+  const api = axios.create({
+    withCredentials: true,
+    baseURL: baseUrl
+ })
 
   const folderPresetList = [
     {name: 'All attachments'},
@@ -55,7 +67,7 @@ function LandingPage({setUserId}) {
   }
 
   async function pushingP3() {
-    var result = await Axios.get(baseUrl +"attachments/1", { withCredentials: true});
+    var result = await api.get('/attachments/1');
 
     console.log("The Heroku Api Response is: " + result.data);
   }

@@ -3,6 +3,13 @@ import GoogleLogin from "react-google-login";
 import { useSearchParams } from "react-router-dom";
 
 function Login({setActiveCard}) {
+    var baseUrl = "";
+    switch(process.env.NODE_ENV) {
+        case 'production':
+            baseUrl = "https://api.refile.email"
+        default:
+            baseUrl = 'https://refile-dev.herokuapp.com'
+    }
 
     const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
@@ -26,7 +33,7 @@ function Login({setActiveCard}) {
     };
 
     function loginRedirect() {
-        window.location.href = "https://refile.herokuapp.com/login";
+        window.location.href = baseUrl + "/login";
         setActiveCard("SecondCard");
     }
 
