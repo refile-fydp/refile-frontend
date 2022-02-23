@@ -5,7 +5,7 @@
 
 #students {
   text-align: center;
-  font-size: 16px;
+  font-size: 12px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   border: 3px solid #ddd;
@@ -24,7 +24,7 @@
 #students th {
   padding-top: 12px;
   padding-bottom: 12px;
-  font-size: 14px;
+  font-size: 10px;
   text-align: center;
   background-color: #ffffff;
   color: black;

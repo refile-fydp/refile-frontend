@@ -1,42 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import GoogleLogin from "react-google-login";
 import { useSearchParams } from "react-router-dom";
-
+import { setUserId } from './ApiContract';
+import { findBaseUrl } from './Api';
 function Login({setActiveCard}) {
-    var baseUrl = "";
-    switch(process.env.NODE_ENV) {
-        case 'production':
-            baseUrl = "https://api.refile.email"
-        default:
-            baseUrl = 'https://refile-dev.herokuapp.com'
-    }
 
     const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
         console.log("component mount vibes");
         searchParams.get("userId")
+        setUserId(searchParams.get("userId"));
         console.log("User id is: " + searchParams.get("userId"));
         if (searchParams.get("userId") != null) {
+            console.log("switch");
             setActiveCard('SecondCard');
         }
 
       });
 
-    const responseGoogleSuccess = response => {
-        console.log(response);
-        console.log("success");
-    };
-
-    const responseGoogleError = response => {
-        console.log(response);
-        setActiveCard('FirstCard');
-    };
-
     function loginRedirect() {
-        window.location.href = baseUrl + "/login";
+        window.location.href = findBaseUrl() + "/login";
         setActiveCard("SecondCard");
     }
-
 
     return (
         <div>

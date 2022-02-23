@@ -3,34 +3,19 @@ import * as FaIcons from "react-icons/fa"
 import React, {useEffect, useState} from "react";
 import FolderList from './components/FolderList';
 import ThreadList from './components/ThreadList';
-
+import { getSyncAttachments, getFirstAttachments } from './ApiContract';
 import AddNewFolder from './AddNewFolder';
 import QuickFilterList from './components/QuickFilterList';
 import AttachmentsTable from './components/AttachmentsTable';
-import axios from 'axios';
-import GetAttachmentsData from './GetAttachmentsData.json'
 import { Attachment } from './models/Attachment';
 import AttachmentModel from './models/AttachmentModel';
 
 function LandingPage({setUserId}) {
   React.useEffect(() => pushingP2(), [])
 
-
   const [folderSelected, setFolderSelected] = useState();
   const [threadSelected, setThreadSelected] = useState();
 
-  var baseUrl = "";
-  switch(process.env.NODE_ENV) {
-    case 'production':
-      baseUrl = "https://api.refile.email"
-    default:
-      baseUrl = 'https://refile-dev.herokuapp.com'
-  }
-
-  const api = axios.create({
-    withCredentials: true,
-    baseURL: baseUrl
- })
 
   const folderPresetList = [
     {name: 'All attachments'},
@@ -66,30 +51,36 @@ function LandingPage({setUserId}) {
     setFolders([quickFilters, ...quickFilters]);
   }
 
-  async function pushingP3() {
-    var result = await api.get('/attachments/1');
+  // async function pushingP3() {
+  //   var result = await Api.get('/attachments/1');
 
-    console.log("The Heroku Api Response is: " + result.data);
-  }
+  //   console.log("The Heroku Api Response is: " + result.data);
+  // }
+
   const [attachments, setAttachments] = useState([]);
   const [workspace, setWorkspace] = useState('files');
 
   const arraylist = [];
 
-  function pushingP2() {
-    GetAttachmentsData.map((object) => {
-      console.log(object);
-      arraylist.push(object)
-    })
-    setAttachments(arraylist);
+  async function pushingP2() {
+    var result = await getFirstAttachments();
+    console.log("result from p3 is: " + result);
+    setAttachments(result);
+  }
+
+  async function refreshAttachments() {
+    setAttachments([]);
+    var result = await getSyncAttachments();
+    console.log("result from p3 is: " + result);
+    setAttachments(result);
   }
 
   return (
     <div className="app">
-      <button onClick={pushingP3}>PUSHING Attachmennts</button>
+      <button onClick={refreshAttachments}>REFRESH ATTACHMENTS</button>
       <button onClick={pushingP2}>PUSHING PPP</button>
 
-      <div className="app__header" onChange={pushingP2}>
+      <div className="app__header">
         <p className="header__title">Attachment Manager</p>
         <p className="header__subtitle">sydefydp2022@gmail.com</p>
 
@@ -116,16 +107,16 @@ function LandingPage({setUserId}) {
 
         <div className="app__attachments">
             <p className='app__toolbar__option_title' onClick={() => setWorkspace("files")}>Files</p>
-            <p className='app__toolbar__option_title' onClick={() => setWorkspace("folder")}>Folder</p>
+            <p className='app__toolbar__option_title' onClick={() => setWorkspace("folders")}>Folders</p>
             {workspace == "files" && 
-              <AttachmentsTable attachments={attachments}></AttachmentsTable> 
+              <AttachmentsTable from={'files'} attachments={attachments}></AttachmentsTable> 
             }
-            {workspace == "folder" &&
+            {workspace == "folders" &&
               <div>
                 <p>{folderSelected}</p>
-                <AttachmentsTable filter={folderSelected} attachments={attachments}></AttachmentsTable> 
-
                 <FolderList setFolderSelected={setFolderSelected} folders={folders} />
+                <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable> 
+
               </div>
 
             }

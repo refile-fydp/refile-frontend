@@ -16,29 +16,31 @@ class AttachmentsTable extends React.Component {
        this.state = {
           tableAttachments: []
        }
-       props.attachments.map(attachment => {
-         array.push(new Attachment(
-            attachment.id,
-            attachment.name,
-             attachment.subject,
-              attachment.sender,
-               attachment.createdDate
-               ));
-         // if (props.filter != "" || props.filter){
-         //    console.log("filter exists" + props.filter);
-         //    if (attachment.categories == props.filter) {
-         //       console.log("filter was selected");
 
-         //       array.push(new Attachment(
-         //          attachment.id,
-         //          attachment.name,
-         //           attachment.subject,
-         //            attachment.sender,
-         //             attachment.createdDate
-         //             ));
-         //    }
-         // }
-       })
+      if (props.from == 'files') {
+         props.attachments.map(attachment => {
+            array.push(new Attachment(
+               attachment.id,
+               attachment.name,
+               attachment.subject,
+               attachment.sender,
+                  attachment.createdDate
+                  ));
+         })
+      } else if (props.from == 'folders') {
+         props.attachments.map(attachment => {
+            if (props.filter == attachment.categories) {
+               array.push(new Attachment(
+                  attachment.id,
+                  attachment.name,
+                  attachment.subject,
+                  attachment.sender,
+                     attachment.createdDate
+                     ));
+            }
+         })
+      }
+
        this.state.tableAttachments = array;
        
     }
