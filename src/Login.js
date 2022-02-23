@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GoogleLogin from "react-google-login";
 import { useSearchParams } from "react-router-dom";
 import { setUserId } from './ApiContract';
-import { findBaseUrl } from './Api';
+import { baseUrl } from './Api';
 function Login({setActiveCard}) {
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +19,7 @@ function Login({setActiveCard}) {
       });
 
     function loginRedirect() {
-        window.location.href = findBaseUrl() + "/login";
+        window.location.href = baseUrl + "/login";
         setActiveCard("SecondCard");
     }
 
