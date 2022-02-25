@@ -1,5 +1,5 @@
 {
-  "homepage": "https://refile-fydp.github.io",
+  "homepage": "https://refile.email",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.16.1",
@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && cp CNAME build/CNAME",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
