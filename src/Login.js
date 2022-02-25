@@ -20,7 +20,6 @@ function Login({setActiveCard}) {
 
     function loginRedirect() {
         window.location.href = baseUrl + "/login";
-        setActiveCard("SecondCard");
     }
 
     return (
