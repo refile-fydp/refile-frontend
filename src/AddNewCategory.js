@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import FolderForm from './components/FolderForm';
 import * as FaIcons from "react-icons/fa"
 
-function AddNewFolder({addFolder}) {
+function AddNewCategory({addCategory}) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickToOpen = () => {
@@ -28,7 +28,7 @@ function AddNewFolder({addFolder}) {
             <DialogTitle>{"Enter name of new folder"}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                <FolderForm addFolder={addFolder}/>
+                <FolderForm addCategory={addCategory}/>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -42,4 +42,4 @@ function AddNewFolder({addFolder}) {
     );
 }
 
-export default AddNewFolder;
+export default AddNewCategory;

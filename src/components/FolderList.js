@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Folder from "./Folder";
 
 function FolderList({setFolderSelected, folders}) {
-    const [viewName, setViewName] = useState('All attachments');
+    const [viewName, setViewName] = useState();
     const [categories, setCategories] = useState([]);
     
     useEffect(() => {

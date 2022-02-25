@@ -4,32 +4,11 @@ import React, {useEffect, useState} from "react";
 import FolderList from './components/FolderList';
 import ThreadList from './components/ThreadList';
 import { getSyncAttachments, getFirstAttachments, getUserInformation } from './ApiContract';
-import AddNewFolder from './AddNewFolder';
-import QuickFilterList from './components/QuickFilterList';
+import AddNewFolder from './AddNewCategory';
 import AttachmentsTable from './components/AttachmentsTable';
-import { Attachment } from './models/Attachment';
-import { User } from './models/User';
 
-import AttachmentModel from './models/AttachmentModel';
 
 function LandingPage() {
-  const [workspace, setWorkspace] = useState("files");
- 
-  useEffect(() => pushingP2(), [])
-  useEffect(() => getUserInfo(), [])
-  
-
-  const [folderSelected, setFolderSelected] = useState();
-  const [threadSelected, setThreadSelected] = useState();
-
-  const folderPresetList = [
-    {name: 'All attachments'},
-    {name: 'Bookmark'},
-    {name: 'Receipt'},
-    {name: 'Design'},
-    {name: 'Invoice'},
-    {name: 'Contract'}
-  ];
 
   const threadPresetList = [
     {name: 'Thread1', sender: 'tosh@gmail.com', date: '07/14/2021'},
@@ -43,23 +22,26 @@ function LandingPage() {
     {name: 'pdf files'},
   ];
 
-  const [folders, setFolders] = useState(folderPresetList);
+  const [workspace, setWorkspace] = useState("files");
+  const [folderSelected, setFolderSelected] = useState();
+  const [threadSelected, setThreadSelected] = useState();
+  const [categories, setCategories] = useState();
   const [threads, setThreads] = useState(threadPresetList);
-
   const [quickFilters, setQuickFilters] = useState(quickFiltersList);
 
-  function addFolder(folder) {
-      setFolders([folder, ...folders]);
+  useEffect(() => getAttachments(), [])
+  useEffect(() => getUserInfo(), [])
+
+  function addCategory(category) {
+    setCategories([category, ...categories]);
   }
 
   function addQuickFilters(quickFilters) {
-    setFolders([quickFilters, ...quickFilters]);
+    setCategories([quickFilters, ...quickFilters]);
   }
 
   const [attachments, setAttachments] = useState([]);
   const [userInfo, setUserInfo]= useState([]);
-
-  const arraylist = [];
 
   async function getUserInfo() {
     var userInfo = await getUserInformation();
@@ -67,9 +49,8 @@ function LandingPage() {
     setUserInfo(userInfo)
   }
 
-  async function pushingP2() {
+  async function getAttachments() {
     var attachments = await getFirstAttachments();
-    console.log("result from p3 is: " + attachments);
     setAttachments(attachments);
   }
 
@@ -78,7 +59,6 @@ function LandingPage() {
   async function refreshAttachments() {
     setAttachments([]);
     var result = await getSyncAttachments();
-    console.log("result from p3 is: " + result);
     setAttachments(result);
   }
 
@@ -107,14 +87,14 @@ function LandingPage() {
 
       <div className="app__main">
         <div className="app__folder">
-          <AddNewFolder addFolder={addFolder}/>
+          <AddNewFolder addCategory={addCategory}/>
           <p className='app__folder__title'>Threads</p>
           <ThreadList setThreadSelected={setThreadSelected} threads={threads}></ThreadList>
         </div>
 
         <div className="app__attachments">
-            <p className='app__toolbar__option_title' onClick={() => setWorkspace("files")}>Files</p>
-            <p className='app__toolbar__option_title' onClick={() => setWorkspace("folders")} >Folders</p>
+            <p className='app__toolbar__option__title' onClick={() => setWorkspace("files")}>Files</p>
+            <p className='app__toolbar__option__title' onClick={() => setWorkspace("folders")}>Folders</p>
             
             {workspace == "files" && 
               <AttachmentsTable from={'files'} attachments={attachments}></AttachmentsTable> 
@@ -123,12 +103,9 @@ function LandingPage() {
             {workspace == "folders" && 
               <div>
                 <FolderList setFolderSelected={setFolderSelected} folders={userInfo.categories} />
-                <p>{folderSelected}</p>
-
+                <p className='app__folder__selected__title'>{folderSelected}</p>
                 <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable>
-                
-
-
+          
               </div>
             }    
 

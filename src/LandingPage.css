@@ -91,7 +91,7 @@
 .app__folder__list{
     font-size:small;
     font-weight: bold;
-    padding-left: 8px;
+    margin-left: 14px;
 }
 
 .app__folder__list__item__hover:hover{
@@ -101,6 +101,10 @@
     color: cornflowerblue;
 }
 
+.app__folder__selected__title {
+    margin-left: 14px;
+    font-size: medium;
+}
 /*THREAD SECTION*/
 
 .app__thread__list{
@@ -173,23 +177,22 @@
 }
 
 
-
 /*TOOLBAR*/
 
-.app__toolbar__option_title{
+.app__toolbar__option__title{
     display: inline-block;
     font-size: large;
     margin-left: 8px;
 
 }
-.app__toolbar__option_title:hover{
+.app__toolbar__option__title:hover{
     display: inline-block;
     font-size: large;
     margin-left: 8px;
     color: cornflowerblue;
 }
 
-.app__toolbar__option_title:active{
+.app__toolbar__option__title:active{
     display: inline-block;
     font-size: large;
     margin-left: 8px;
