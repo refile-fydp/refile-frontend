@@ -1,4 +1,5 @@
 import { instance } from "./Api"; 
+import { User } from "./models/User";
 
 var userId = '';
 
@@ -6,10 +7,11 @@ export function setUserId(userIdFromLogin){
     userId = userIdFromLogin;
 }
 
-export async function getUserIdInformation() {
+export async function getUserInformation() {
   var result =  await instance.get('/users/' + userId);
-  console.log("gangway " + result);
-  return result;
+  var userInfo = new User(result.data.userId, result.data.email, result.data.name, result.data.categories);
+  console.log("gangway " + result.data);
+  return userInfo;
 }
 
 export async function getFirstAttachments() {
