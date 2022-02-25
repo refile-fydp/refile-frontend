@@ -8,6 +8,12 @@
     bottom:10%;
     border-left:1px solid grey;
 }
+.refresh {
+    margin-top: 24px;
+    margin-right: 12px;
+    float: right;
+}
+/* ff */
 
 
 .app{

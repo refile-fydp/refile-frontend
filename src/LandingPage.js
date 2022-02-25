@@ -65,8 +65,6 @@ function LandingPage() {
   
   return (
     <div className="app">
-      <button onClick={refreshAttachments}>REFRESH ATTACHMENTS</button>
-
       <div className="app__header">
         <p className="header__title">Re:File</p>
         <p className="header__subtitle">{userInfo.email}</p>
@@ -95,7 +93,8 @@ function LandingPage() {
         <div className="app__attachments">
             <p className='app__toolbar__option__title' onClick={() => setWorkspace("files")}>Files</p>
             <p className='app__toolbar__option__title' onClick={() => setWorkspace("folders")}>Folders</p>
-            
+            <FaIcons.FaSync className='refresh' onClick={refreshAttachments}>REFRESH ATTACHMENTS</FaIcons.FaSync>
+
             {workspace == "files" && 
               <AttachmentsTable from={'files'} attachments={attachments}></AttachmentsTable> 
             }
