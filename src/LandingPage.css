@@ -1,3 +1,15 @@
+/* UTILITY*/
+
+
+.divider{
+    position:absolute;
+    left:50%;
+    top:10%;
+    bottom:10%;
+    border-left:1px solid grey;
+}
+
+
 .app{
     display: flex;
     flex-direction: column;
@@ -24,6 +36,7 @@
 .header__title{
     font-size: 20px;
     font-weight: bold;
+
 }
 
 .header__subtitle{
@@ -128,9 +141,9 @@
 /*ATTACHMENT SECTION*/
 
 .app__attachments{
-    border-style: dotted; 
+    /*border-style: dotted; */
     float: right; 
-    max-width: 80%;
+    max-width: 70%;
     min-width: 70%;
 }
 

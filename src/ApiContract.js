@@ -6,8 +6,14 @@ export function setUserId(userIdFromLogin){
     userId = userIdFromLogin;
 }
 
+export async function getUserIdInformation() {
+  var result =  await instance.get('/users/' + userId);
+  console.log("gangway " + result);
+  return result;
+}
+
 export async function getFirstAttachments() {
-      const arraylist = [];
+    const arraylist = [];
 
     var result =  await instance.get('/attachments/' + userId);
     result.data.map((object) => {

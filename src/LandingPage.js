@@ -3,20 +3,22 @@ import * as FaIcons from "react-icons/fa"
 import React, {useEffect, useState} from "react";
 import FolderList from './components/FolderList';
 import ThreadList from './components/ThreadList';
-import { getSyncAttachments, getFirstAttachments } from './ApiContract';
+import { getSyncAttachments, getFirstAttachments, getUserIdInformation } from './ApiContract';
 import AddNewFolder from './AddNewFolder';
 import QuickFilterList from './components/QuickFilterList';
 import AttachmentsTable from './components/AttachmentsTable';
 import { Attachment } from './models/Attachment';
 import AttachmentModel from './models/AttachmentModel';
 
-function LandingPage({setUserId}) {
-  React.useEffect(() => pushingP2(), [])
+function LandingPage() {
+  const [workspace, setWorkspace] = useState("files");
+ 
+  useEffect(() => pushingP2(), [])
+  useEffect(() => getUserIdInformation(), [])
+  
 
   const [folderSelected, setFolderSelected] = useState();
   const [threadSelected, setThreadSelected] = useState();
-
-
   const folderPresetList = [
     {name: 'All attachments'},
     {name: 'Bookmark'},
@@ -58,7 +60,6 @@ function LandingPage({setUserId}) {
   // }
 
   const [attachments, setAttachments] = useState([]);
-  const [workspace, setWorkspace] = useState('files');
 
   const arraylist = [];
 
@@ -68,6 +69,8 @@ function LandingPage({setUserId}) {
     setAttachments(result);
   }
 
+
+
   async function refreshAttachments() {
     setAttachments([]);
     var result = await getSyncAttachments();
@@ -75,13 +78,13 @@ function LandingPage({setUserId}) {
     setAttachments(result);
   }
 
+  
   return (
     <div className="app">
       <button onClick={refreshAttachments}>REFRESH ATTACHMENTS</button>
-      <button onClick={pushingP2}>PUSHING PPP</button>
 
       <div className="app__header">
-        <p className="header__title">Attachment Manager</p>
+        <p className="header__title">Re:File</p>
         <p className="header__subtitle">sydefydp2022@gmail.com</p>
 
         <form className="header__searchform" >
@@ -107,21 +110,23 @@ function LandingPage({setUserId}) {
 
         <div className="app__attachments">
             <p className='app__toolbar__option_title' onClick={() => setWorkspace("files")}>Files</p>
-            <p className='app__toolbar__option_title' onClick={() => setWorkspace("folders")}>Folders</p>
+            <p className='app__toolbar__option_title' onClick={() => setWorkspace("folders")} >Folders</p>
+            
             {workspace == "files" && 
               <AttachmentsTable from={'files'} attachments={attachments}></AttachmentsTable> 
             }
-            {workspace == "folders" &&
+
+            {workspace == "folders" && 
               <div>
-                <p>{folderSelected}</p>
                 <FolderList setFolderSelected={setFolderSelected} folders={folders} />
-                <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable> 
+                <p>{folderSelected}</p>
+
+                <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable>
+                
+
 
               </div>
-
-            }
-
-            
+            }    
 
         </div>
       </div>

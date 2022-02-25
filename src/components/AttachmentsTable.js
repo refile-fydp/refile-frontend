@@ -6,12 +6,6 @@ class AttachmentsTable extends React.Component {
     constructor(props) {
        super(props)
       
-      //  const attachments = [
-      //    new Attachment(1, 'newstyle01', 'boxunli@gmail.com', 'New Design Experiments', '07/21/2021 at 2:54 pm', 'png', 'invoice', ''),
-      //    new Attachment(2, 'newstyle02', 'boxunli@gmail.com', 'New Design Experiments', '07/21/2021 at 2:54 pm', 'png', 'contract', ''),
-      //    new Attachment(3, 'newstyle03', 'boxunli@gmail.com', 'New Design Experiments', '07/21/2021 at 2:54 pm', 'png', 'misc', '')
-      //  ];
-      
       const array = []
        this.state = {
           tableAttachments: []
@@ -44,7 +38,7 @@ class AttachmentsTable extends React.Component {
        this.state.tableAttachments = array;
        
     }
- 
+
     renderTableHeader() {
        return (
          <tr>
