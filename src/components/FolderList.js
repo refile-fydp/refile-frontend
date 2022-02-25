@@ -1,8 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Folder from "./Folder";
 
 function FolderList({setFolderSelected, folders}) {
     const [viewName, setViewName] = useState('All attachments');
+    const [categories, setCategories] = useState([]);
+    
+    useEffect(() => {
+        setCategories(folders);
+    });
 
     function setSends() {
         setFolderSelected(viewName);
@@ -10,8 +15,8 @@ function FolderList({setFolderSelected, folders}) {
 
     return (
         <div onChange={setSends()} className="app__folder__list">
-            {folders.map(folder => (
-                <Folder setViewName={setViewName} key={folder.id} folder={folder} />
+            {categories.map(category => (
+                <Folder setViewName={setViewName} key={category.id} folder={category} />
             ))}
         </div>
     );

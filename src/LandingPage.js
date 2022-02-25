@@ -3,22 +3,25 @@ import * as FaIcons from "react-icons/fa"
 import React, {useEffect, useState} from "react";
 import FolderList from './components/FolderList';
 import ThreadList from './components/ThreadList';
-import { getSyncAttachments, getFirstAttachments, getUserIdInformation } from './ApiContract';
+import { getSyncAttachments, getFirstAttachments, getUserInformation } from './ApiContract';
 import AddNewFolder from './AddNewFolder';
 import QuickFilterList from './components/QuickFilterList';
 import AttachmentsTable from './components/AttachmentsTable';
 import { Attachment } from './models/Attachment';
+import { User } from './models/User';
+
 import AttachmentModel from './models/AttachmentModel';
 
 function LandingPage() {
   const [workspace, setWorkspace] = useState("files");
  
   useEffect(() => pushingP2(), [])
-  useEffect(() => getUserIdInformation(), [])
+  useEffect(() => getUserInfo(), [])
   
 
   const [folderSelected, setFolderSelected] = useState();
   const [threadSelected, setThreadSelected] = useState();
+
   const folderPresetList = [
     {name: 'All attachments'},
     {name: 'Bookmark'},
@@ -27,6 +30,8 @@ function LandingPage() {
     {name: 'Invoice'},
     {name: 'Contract'}
   ];
+
+  const [categories, setCategories] = useState([]);
 
   const threadPresetList = [
     {name: 'Thread1', sender: 'tosh@gmail.com', date: '07/14/2021'},
@@ -53,20 +58,21 @@ function LandingPage() {
     setFolders([quickFilters, ...quickFilters]);
   }
 
-  // async function pushingP3() {
-  //   var result = await Api.get('/attachments/1');
-
-  //   console.log("The Heroku Api Response is: " + result.data);
-  // }
-
   const [attachments, setAttachments] = useState([]);
+  const [userInfo, setUserInfo]= useState([]);
 
   const arraylist = [];
 
+  async function getUserInfo() {
+    var userInfo = await getUserInformation();
+    setUserInfo(userInfo)
+    setCategories(userInfo.categories)
+  }
+
   async function pushingP2() {
-    var result = await getFirstAttachments();
-    console.log("result from p3 is: " + result);
-    setAttachments(result);
+    var attachments = await getFirstAttachments();
+    console.log("result from p3 is: " + attachments);
+    setAttachments(attachments);
   }
 
 
@@ -85,7 +91,7 @@ function LandingPage() {
 
       <div className="app__header">
         <p className="header__title">Re:File</p>
-        <p className="header__subtitle">sydefydp2022@gmail.com</p>
+        <p className="header__subtitle">{userInfo.email}</p>
 
         <form className="header__searchform" >
           <input 
@@ -118,7 +124,7 @@ function LandingPage() {
 
             {workspace == "folders" && 
               <div>
-                <FolderList setFolderSelected={setFolderSelected} folders={folders} />
+                <FolderList setFolderSelected={setFolderSelected} folders={categories} />
                 <p>{folderSelected}</p>
 
                 <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable>
