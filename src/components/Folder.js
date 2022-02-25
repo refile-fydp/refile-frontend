@@ -4,12 +4,12 @@ function Folder({setViewName, folder}) {
 
     function something(){
         console.log(folder);
-        setViewName(folder.name);
+        setViewName(folder);
     }
 
     return (
-        <div className="app__folder__list__item__hover" onClick={() => setViewName(folder.name)}>
-            <p>{folder.name}</p>
+        <div className="app__folder__list__item__hover" onClick={() => setViewName(folder)}>
+            <p>{folder}</p>
         </div>
     );
 }

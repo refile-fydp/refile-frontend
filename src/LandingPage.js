@@ -31,8 +31,6 @@ function LandingPage() {
     {name: 'Contract'}
   ];
 
-  const [categories, setCategories] = useState([]);
-
   const threadPresetList = [
     {name: 'Thread1', sender: 'tosh@gmail.com', date: '07/14/2021'},
     {name: 'Thread2', sender: 'tosh@gmail.com', date: '07/14/2021'},
@@ -65,8 +63,8 @@ function LandingPage() {
 
   async function getUserInfo() {
     var userInfo = await getUserInformation();
+    console.log(userInfo.categories);
     setUserInfo(userInfo)
-    setCategories(userInfo.categories)
   }
 
   async function pushingP2() {
@@ -124,7 +122,7 @@ function LandingPage() {
 
             {workspace == "folders" && 
               <div>
-                <FolderList setFolderSelected={setFolderSelected} folders={categories} />
+                <FolderList setFolderSelected={setFolderSelected} folders={userInfo.categories} />
                 <p>{folderSelected}</p>
 
                 <AttachmentsTable from={'folders'} filter={folderSelected} attachments={attachments}></AttachmentsTable>

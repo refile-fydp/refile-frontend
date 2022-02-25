@@ -7,6 +7,8 @@ function FolderList({setFolderSelected, folders}) {
     
     useEffect(() => {
         setCategories(folders);
+        console.log("inside folderlist " + categories);
+
     });
 
     function setSends() {
