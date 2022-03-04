@@ -29,14 +29,19 @@
 
 .app__main{
     /*border-style: dotted; */
-
 }
 
 
 /* HEADER SECTION*/
 
 .app__header{
+
     /*border-style: dotted; */
+}
+
+.header__container{
+    display:flex;
+    flex-direction:row;
 }
 
 .header__title{
@@ -47,36 +52,45 @@
 
 .header__subtitle{
     font-size: 16px;
+    margin-left: 16px;
 
 }
 
 .header__searchform{
-    float: right;
+    float: left;
+    display:flex;
+    margin: 14px;
+    flex-direction:row;
 }
 .header__searchform__input{
     padding: 6px 16px;
-    min-width: 300px;
+    min-width: 600px;
     max-width: 100vw;
     font-size: 14px;
   }
 
 .header__searchform__submit{
-    margin-left: 8px;
+    margin-left: 16px;
+    margin-top: 10px;
   }
   
 .header__searchform__submit:hover{
-    margin-left: 8px;
+    margin-left: 16px;
+    margin-top: 10px;
+
     color:  cornflowerblue;
   }
+.header__search__icon__submit{
+    margin-top: 8px;
+}
 
 /*FOLDER SECTION*/
 
-.app__folder{
+.app__threads{
     /*border-style: dotted; */
-
     display: inline-block;
-    min-width: 200px;
-    max-width: 10%;
+    min-width: 300px;
+    max-width: 20%;
 }
 
 .app__folder__title{
@@ -86,6 +100,13 @@
     padding: 4px;
     background-color: gray;
 }
+
+.app__folder__tools{
+    margin-left: 8px;
+    display:flex;
+    flex-direction:row;
+}
+
 
 .app__folder__add{
     padding-left: 8px;
@@ -153,7 +174,7 @@
 .app__attachments{
     /*border-style: dotted; */
     float: right; 
-    max-width: 70%;
+    max-width: 75%;
     min-width: 70%;
 }
 

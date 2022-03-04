@@ -2,11 +2,7 @@ import React, {useState} from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 function FolderForm({addCategory}) {
-    const [category, setCategory] = useState({
-        id: "",
-        name: ""
-
-    });
+    const [category, setCategory] = useState("");
 
     function handleFolderInputChange(e) {
         setCategory({...category, name: e.target.value });
@@ -28,7 +24,7 @@ function FolderForm({addCategory}) {
                 value={category.name}
                 onChange={handleFolderInputChange}
             />
-            <button type="submit">Add folder</button>
+            <button type="submit">Add category</button>
             
       </form>
     )

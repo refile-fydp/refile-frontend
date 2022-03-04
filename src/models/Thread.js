@@ -1,14 +1,10 @@
-export class Attachment{
+export class Thread{
   
-    constructor(id, name, thread, sender, creation_date, extension, category, url) {
-      this.id = id;
+    constructor(name, sender, creation_date) {
       this.name = name;
-      this.thread = thread;
       this.sender = sender;
       this.creation_date = formatDate(creation_date);
-      this.extension = extension;
-      this.category = category;
-      this.url = url;
+
     }
   }
 

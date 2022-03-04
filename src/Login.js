@@ -3,6 +3,10 @@ import GoogleLogin from "react-google-login";
 import { useSearchParams } from "react-router-dom";
 import { setUserId } from './ApiContract';
 import { baseUrl } from './Api';
+import './Login.css';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
 function Login({setActiveCard}) {
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,10 +27,10 @@ function Login({setActiveCard}) {
     }
 
     return (
-        <div>
-           <button onClick={loginRedirect}>
+        <div className='center'>
+           <Button variant="contained" onClick={loginRedirect}>
                LOGIN
-           </button>
+           </Button>
         </div>
     );
 }
