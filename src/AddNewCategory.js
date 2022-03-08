@@ -28,15 +28,9 @@ function AddNewCategory({addCategory}) {
             <DialogTitle>{"Enter name of new folder"}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                <FolderForm addCategory={addCategory}/>
+                    <FolderForm setOpen={handleToClose} addCategory={addCategory}/>
                 </DialogContentText>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleToClose} 
-                        color="primary" autoFocus>
-                Close
-                </Button>
-            </DialogActions>
             </Dialog>
         </div>
     );

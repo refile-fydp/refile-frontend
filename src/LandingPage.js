@@ -3,10 +3,9 @@ import * as FaIcons from "react-icons/fa"
 import React, {useEffect, useState} from "react";
 import FolderList from './components/FolderList';
 import ThreadList from './components/ThreadList';
-import { getSyncAttachments, getFirstAttachments, getUserInformation } from './ApiContract';
+import { getSyncAttachments, getFirstAttachments, getUserInformation, postNewCategories } from './ApiContract';
 import AddNewFolder from './AddNewCategory';
-import AttachmentsTable from './components/AttachmentsTable';
-import MTable from './components/MTable';
+import AttachmentTable from './components/AttachmentTable';
 import ThreadTable from './components/ThreadTable';
 import SenderTable from './components/SenderTable';
 import ReactSearchBox from "react-search-box";
@@ -42,6 +41,8 @@ function LandingPage() {
 
   const [attachments, setAttachments] = useState([]);
   const [userInfo, setUserInfo]= useState([]);
+  const attachmentsForFolders = attachments.slice(0);
+  const [searchTerm, setSearchTerm]= useState("");
 
   useEffect(() => getAttachments(), [])
   useEffect(() => getUserInfo(), [])
@@ -51,11 +52,22 @@ function LandingPage() {
   useEffect(() => setSendersFilter(), [attachments])
   useEffect(() => setFolderSelectedState(), [folderSelected])
   useEffect(() => setCategoriesList(), [userInfo])
+  useEffect(() => backFolder, [folderSelected])
 
-  
+  function searchFiltering() {
+    attachments.filter((val) => {
+      if (searchTerm == ""){
+        return val
+      } else if (val.thread.toLowerCase().includes(searchTerm.toLowerCase)){
+        return val
+      }
+    })
+  }
+
   function addCategory(category) {
-    console.log(category.name);
-    setCategories([category.name, ...categories]);
+    var newList = categories;
+    newList.push(category.name);
+    setCategories(newList);
     setNewCategories();
   }
 
@@ -64,10 +76,8 @@ function LandingPage() {
   }
 
   async function setNewCategories(){
-    var result = await postNewCategories();
-    
+    var result = await postNewCategories(categories);
   }
-
 
   async function getUserInfo() {
     var userInfo = await getUserInformation();
@@ -166,11 +176,12 @@ function LandingPage() {
   }
 
   function backFolder() {
-    setBackFolderPressed(true);
+    setBackFolderPressed(!backFolderPressed);
   }
+  
 
   function setFolderSelectedState() {
-    setBackFolderPressed(false);
+    //setBackFolderPressed(false);
   }
   
   return (
@@ -184,12 +195,13 @@ function LandingPage() {
         </div>
     
         <form className="header__searchform" >
-          <ReactSearchBox
+          <input
+            type="text"
             className='header__searchform__input'
             placeholder="Search file names, users, or subjects"
-            value="Doe"
-            data={attachments}
-            callback={(record) => console.log(record)}
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
           />
           <FaIcons.FaSearch
             className='header__searchform__submit'
@@ -211,7 +223,7 @@ function LandingPage() {
             <FaIcons.FaSync className='refresh' onClick={refreshAttachments}>REFRESH ATTACHMENTS</FaIcons.FaSync>
 
             {workspace == "files" && 
-              <MTable from={'files'} attachments={attachments}/>
+              <AttachmentTable from={'files'} attachments={attachments}/>
             }
 
             {workspace == "folders" && 
@@ -220,11 +232,10 @@ function LandingPage() {
                   <FaIcons.FaBackspace onClick={() => backFolder}></FaIcons.FaBackspace>
                   <AddNewFolder addCategory={addCategory}/>
                 </div>
-                {!folderSelected &&
-                <FolderList setFolderSelected={setFolderSelected} folders={categories} /> }
+                
                 <p className='app__folder__selected__title'>{folderSelected}</p>
-                {folderSelected &&
-                  <MTable from={'folders'} filter={folderSelected} attachments={attachments}></MTable>
+                {(folderSelected && backFolderPressed) ?
+                  <AttachmentTable from={'folders'} filter={folderSelected} attachments={attachmentsForFolders}></AttachmentTable> : <FolderList setFolderSelected={setFolderSelected} folders={categories} />
                 }
               </div>
             }    

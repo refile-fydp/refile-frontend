@@ -5,7 +5,6 @@ import { setUserId } from './ApiContract';
 import { baseUrl } from './Api';
 import './Login.css';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 
 function Login({setActiveCard}) {
 

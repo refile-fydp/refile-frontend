@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.light,
-        color: theme.palette.getContrastText(theme.palette.primary.light)
+        color: theme.palette.getContrastText(theme.palette.primary.light),
+
     },
     name: {
         fontWeight: 'bold',
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 let entries = []
 
-function MTable({ from, filter, attachments }) {
+function AttachmentTable({ from, filter, attachments }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -147,4 +148,4 @@ function MTable({ from, filter, attachments }) {
   );
 }
 
-export default MTable;
+export default AttachmentTable;

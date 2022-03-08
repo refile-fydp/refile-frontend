@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Button from "@material-ui/core/Button";
 
-function FolderForm({addCategory}) {
+function FolderForm({addCategory, setOpen}) {
     const [category, setCategory] = useState("");
 
     function handleFolderInputChange(e) {
@@ -24,7 +25,7 @@ function FolderForm({addCategory}) {
                 value={category.name}
                 onChange={handleFolderInputChange}
             />
-            <button type="submit">Add category</button>
+            <Button color="primary" type="submit" onClick={() => setOpen(false)}>Add category</Button>
             
       </form>
     )

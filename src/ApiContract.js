@@ -7,6 +7,17 @@ export function setUserId(userIdFromLogin){
     userId = userIdFromLogin;
 }
 
+export async function postNewCategories(categories) {
+  console.log("categories are: " + categories);
+  instance.patch('/users/' + userId, 
+	{ 
+    categories: categories}, 
+	{
+		// Config
+	}
+);
+}
+
 export async function getUserInformation() {
   var result =  await instance.get('/users/' + userId);
   var userInfo = new User(result.data.userId, result.data.email, result.data.name, result.data.categories);
