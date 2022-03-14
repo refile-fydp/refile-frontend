@@ -1,28 +1,32 @@
-import './LandingPage.css';
-import * as FaIcons from "react-icons/fa"
-import React, {useEffect, useState} from "react";
-import FolderList from './components/FolderList';
-import ThreadList from './components/ThreadList';
-import { getSyncAttachments, getFirstAttachments, getUserInformation, postNewCategories } from './ApiContract';
-import AddNewFolder from './AddNewCategory';
-import AttachmentTable from './components/AttachmentTable';
-import ThreadTable from './components/ThreadTable';
-import SenderTable from './components/SenderTable';
+import "./LandingPage.css";
+import * as FaIcons from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import FolderList from "./components/FolderList";
+import ThreadList from "./components/ThreadList";
+import {
+  getSyncAttachments,
+  getFirstAttachments,
+  getUserInformation,
+  postNewCategories,
+} from "./ApiContract";
+import AddNewFolder from "./AddNewCategory";
+import AttachmentTable from "./components/AttachmentTable";
+import ThreadTable from "./components/ThreadTable";
+import SenderTable from "./components/SenderTable";
 import ReactSearchBox from "react-search-box";
-import _ from "lodash"
+import _ from "lodash";
 
 function LandingPage() {
-
   const threadPresetList = [
-    {name: 'Thread1', sender: 'tosh@gmail.com', creation_date: '07/14/2021'},
-    {name: 'Thread2', sender: 'tosh@gmail.com', creation_date: '07/14/2021'},
-    {name: 'Thread3', sender: 'tosh@gmail.com', creation_date: '07/14/2021'},
+    { name: "Thread1", sender: "tosh@gmail.com", creation_date: "07/14/2021" },
+    { name: "Thread2", sender: "tosh@gmail.com", creation_date: "07/14/2021" },
+    { name: "Thread3", sender: "tosh@gmail.com", creation_date: "07/14/2021" },
   ];
 
   const quickFiltersList = [
-    {name: 'sent by me'},
-    {name: 'from past year'},
-    {name: 'pdf files'},
+    { name: "sent by me" },
+    { name: "from past year" },
+    { name: "pdf files" },
   ];
 
   const [workspace, setWorkspace] = useState("files");
@@ -40,28 +44,28 @@ function LandingPage() {
   const handleSenderClick = (senderName) => setSenderNameClicked(senderName);
 
   const [attachments, setAttachments] = useState([]);
-  const [userInfo, setUserInfo]= useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   const attachmentsForFolders = attachments.slice(0);
-  const [searchTerm, setSearchTerm]= useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => getAttachments(), [])
-  useEffect(() => getUserInfo(), [])
-  useEffect(() => threadClicked(), [threadNameClicked])
-  useEffect(() => senderClicked(), [senderNameClicked])
-  useEffect(() => setThreadsFilter(), [attachments])
-  useEffect(() => setSendersFilter(), [attachments])
-  useEffect(() => setFolderSelectedState(), [folderSelected])
-  useEffect(() => setCategoriesList(), [userInfo])
-  useEffect(() => backFolder, [folderSelected])
+  useEffect(() => getAttachments(), []);
+  useEffect(() => getUserInfo(), []);
+  useEffect(() => threadClicked(), [threadNameClicked]);
+  useEffect(() => senderClicked(), [senderNameClicked]);
+  useEffect(() => setThreadsFilter(), [attachments]);
+  useEffect(() => setSendersFilter(), [attachments]);
+  useEffect(() => setFolderSelectedState(), [folderSelected]);
+  useEffect(() => setCategoriesList(), [userInfo]);
+  useEffect(() => backFolder, [folderSelected]);
 
   function searchFiltering() {
     attachments.filter((val) => {
-      if (searchTerm == ""){
-        return val
-      } else if (val.thread.toLowerCase().includes(searchTerm.toLowerCase)){
-        return val
+      if (searchTerm == "") {
+        return val;
+      } else if (val.thread.toLowerCase().includes(searchTerm.toLowerCase)) {
+        return val;
       }
-    })
+    });
   }
 
   function addCategory(category) {
@@ -75,14 +79,14 @@ function LandingPage() {
     setCategories([quickFilters, ...quickFilters]);
   }
 
-  async function setNewCategories(){
+  async function setNewCategories() {
     var result = await postNewCategories(categories);
   }
 
   async function getUserInfo() {
     var userInfo = await getUserInformation();
     console.log(userInfo.categories);
-    setUserInfo(userInfo)
+    setUserInfo(userInfo);
   }
 
   async function getAttachments() {
@@ -100,38 +104,38 @@ function LandingPage() {
     //get the 6 most recent threads based on date. do this by sorting attachments based on date propert
     //then choose top 6, but in new array and return as
     var removedDuplicateThreads = attachments.reduce((unique, o) => {
-      if(!unique.some(obj => obj.thread === o.thread)) {
+      if (!unique.some((obj) => obj.thread === o.thread)) {
         unique.push(o);
       }
       return unique;
-    },[]);
+    }, []);
     setThreads(removedDuplicateThreads);
   }
 
   function setSendersFilter() {
     const myArray = [];
-    attachments.forEach(element => {
-      myArray.push(element.sender)
+    attachments.forEach((element) => {
+      myArray.push(element.sender);
     });
-    var frequency = {}, value;
+    var frequency = {},
+      value;
     // compute frequencies of each value
-    for(var i = 0; i < myArray.length; i++) {
-        value = myArray[i];
-        if(value in frequency) {
-            frequency[value]++;
-        }
-        else {
-            frequency[value] = 1;
-        }
+    for (var i = 0; i < myArray.length; i++) {
+      value = myArray[i];
+      if (value in frequency) {
+        frequency[value]++;
+      } else {
+        frequency[value] = 1;
+      }
     }
     // make array from the frequency object to de-duplicate
     var uniques = [];
-    for(value in frequency) {
-        uniques.push(value);
+    for (value in frequency) {
+      uniques.push(value);
     }
     // sort the uniques array in descending order by frequency
     function compareFrequency(a, b) {
-        return frequency[b] - frequency[a];
+      return frequency[b] - frequency[a];
     }
     uniques.sort(compareFrequency);
     setSenders(uniques);
@@ -141,10 +145,10 @@ function LandingPage() {
     var filteredByThreadAttachments = [];
 
     if (threadNameClicked == "") {
-      console.log("clicked on landing page was empty")
+      console.log("clicked on landing page was empty");
     } else {
-      attachments.forEach(element => {
-        if (element.thread == threadNameClicked){
+      attachments.forEach((element) => {
+        if (element.thread == threadNameClicked) {
           console.log("element: " + element.thread);
           filteredByThreadAttachments.push(element);
         }
@@ -158,10 +162,10 @@ function LandingPage() {
     var filteredBySenderAttachments = [];
 
     if (senderNameClicked == "") {
-      console.log("clicked on landing page was empty")
+      console.log("clicked on landing page was empty");
     } else {
-      attachments.forEach(element => {
-        if (element.sender == senderNameClicked){
+      attachments.forEach((element) => {
+        if (element.sender == senderNameClicked) {
           console.log("element: " + element.thread);
           filteredBySenderAttachments.push(element);
         }
@@ -178,71 +182,94 @@ function LandingPage() {
   function backFolder() {
     setBackFolderPressed(!backFolderPressed);
   }
-  
 
   function setFolderSelectedState() {
     //setBackFolderPressed(false);
   }
-  
+
   return (
     <div className="app">
-      <div className="app__header">
-      <p className="header__title">Re:File</p>
-
-        <div className='header__container'>
-          <p className="header__subtitle">{userInfo.name}</p>
+      <div className="header__container">
+        <div className="app__header">
+          <p className="header__title">Re:File</p>
           <p className="header__subtitle">{userInfo.email}</p>
         </div>
-    
-        <form className="header__searchform" >
+        <form className="header__searchform">
           <input
             type="text"
-            className='header__searchform__input'
+            className="header__searchform__input"
             placeholder="Search file names, users, or subjects"
             onChange={(event) => {
               setSearchTerm(event.target.value);
             }}
           />
           <FaIcons.FaSearch
-            className='header__searchform__submit'
+            className="header__searchform__submit"
             type="submit"
-            value="Search">
-          </FaIcons.FaSearch> 
+            value="Search"
+          ></FaIcons.FaSearch>
         </form>
+        <div className="refesh_button">
+          <FaIcons.FaRedo className="refresh_icon" onClick={refreshAttachments}>
+            REFRESH ATTACHMENTS
+          </FaIcons.FaRedo>
+          <p className="refresh_text">Refresh</p>
+        </div>
       </div>
-
+      <div className="app__threads">
+        <SenderTable
+          senders={senders}
+          setSenderNameClicked={handleSenderClick}
+        ></SenderTable>
+        <ThreadTable
+          threads={threads}
+          setThreadNameClicked={handleThreadClick}
+        ></ThreadTable>
+      </div>
       <div className="app__main">
-        <div className="app__threads">
-          <SenderTable senders={senders} setSenderNameClicked={handleSenderClick}></SenderTable>
-          <ThreadTable threads={threads} setThreadNameClicked={handleThreadClick}></ThreadTable>
-        </div>
-
         <div className="app__attachments">
-            <p className='app__toolbar__option__title' onClick={() => setWorkspace("files")}>Files</p>
-            <p className='app__toolbar__option__title' onClick={() => setWorkspace("folders")}>Folders</p>
-            <FaIcons.FaSync className='refresh' onClick={refreshAttachments}>REFRESH ATTACHMENTS</FaIcons.FaSync>
+          <p
+            className="app__toolbar__option__title"
+            onClick={() => setWorkspace("files")}
+          >
+            Files
+          </p>
+          <p
+            className="app__toolbar__option__title"
+            onClick={() => setWorkspace("folders")}
+          >
+            Categories
+          </p>
+          {workspace == "files" && (
+            <AttachmentTable from={"files"} attachments={attachments} />
+          )}
 
-            {workspace == "files" && 
-              <AttachmentTable from={'files'} attachments={attachments}/>
-            }
-
-            {workspace == "folders" && 
-              <div>
-                <div className='app__folder__tools'>
-                  <FaIcons.FaBackspace onClick={() => backFolder}></FaIcons.FaBackspace>
-                  <AddNewFolder addCategory={addCategory}/>
-                </div>
-                
-                <p className='app__folder__selected__title'>{folderSelected}</p>
-                {(folderSelected && backFolderPressed) ?
-                  <AttachmentTable from={'folders'} filter={folderSelected} attachments={attachmentsForFolders}></AttachmentTable> : <FolderList setFolderSelected={setFolderSelected} folders={categories} />
-                }
+          {workspace == "folders" && (
+            <div>
+              <div className="app__folder__tools">
+                <FaIcons.FaBackspace
+                  onClick={() => backFolder}
+                ></FaIcons.FaBackspace>
+                <AddNewFolder addCategory={addCategory} />
               </div>
-            }    
 
+              <p className="app__folder__selected__title">{folderSelected}</p>
+              {folderSelected && backFolderPressed ? (
+                <AttachmentTable
+                  from={"folders"}
+                  filter={folderSelected}
+                  attachments={attachmentsForFolders}
+                ></AttachmentTable>
+              ) : (
+                <FolderList
+                  setFolderSelected={setFolderSelected}
+                  folders={categories}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
-
     </div>
   );
 }

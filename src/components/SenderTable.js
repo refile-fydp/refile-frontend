@@ -1,58 +1,59 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import { Thread } from "../models/Thread";
-import { 
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-    Grid,
-    Typography,
-    TableFooter
- } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  Paper,
+  Grid,
+  Typography,
+  TableFooter,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    table: {
-      minWidth: 100,
+  table: {
+    minWidth: 100,
+    border: "none",
+  },
+  tableContainer: {
+    borderRadius: 0,
+    margin: "10px 10px",
+    border: "none",
+  },
+  tableHeaderCell: {
+    fontWeight: "regular",
+    backgroundColor: "#F5F5F5",
+    color: "black",
+    border: "none",
+  },
+  tableRow: {
+    "&:hover": {
+      backgroundColor: "lightgrey",
     },
-    tableContainer: {
-        borderRadius: 15,
-        margin: '10px 10px',
-        maxWidth: 250
-    },
-    tableHeaderCell: {
-        margin: '20px 20px',
-        fontWeight: 'bold',
-        backgroundColor: theme.palette.primary.dark,
-        color: theme.palette.getContrastText(theme.palette.primary.dark),
-    },
-    tableRow: {
-        "&:hover": {
-          backgroundColor: 'lightgrey',
-        },
-          
-    },
-    name: {
-        overflow: 'hidden',
-        numberOfLines: 1,
-        fontSize: 13
+  },
+  name: {
+    overflow: "hidden",
+    numberOfLines: 1,
+    fontSize: 13,
+  },
+  generic: {
+    numberOfLines: 1,
+  },
+  tableCell: {
+    border: "none",
+  },
+}));
 
-    },
-    generic: {
-        numberOfLines: 1
-    }
-  }));
+let entries = [];
 
-let entries = []
-
-function SenderTable({senders, setSenderNameClicked}) {
+function SenderTable({ senders, setSenderNameClicked }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(3);
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,16 +70,16 @@ function SenderTable({senders, setSenderNameClicked}) {
   }
 
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" }
-    return new Date(dateString).toLocaleDateString(undefined, options)
-  }
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   useEffect(() => {
-     const tempArray = [];
-        senders.forEach(sender => {
-           tempArray.push(sender);
-        })
-        setTableSender(tempArray);
+    const tempArray = [];
+    senders.forEach((sender) => {
+      tempArray.push(sender);
+    });
+    setTableSender(tempArray);
   }, [senders]);
 
   return (
@@ -90,20 +91,21 @@ function SenderTable({senders, setSenderNameClicked}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableSender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-            <TableRow className={classes.tableRow} key={row.name}>
-              <TableCell>
+          {tableSender
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row) => (
+              <TableRow className={classes.tableRow} key={row.name}>
+                <TableCell className={classes.tableCell}>
                   <Grid container>
-                      <Grid item lg={10} onClick={() => handleSenderClick(row)}>
-                          <Typography className={classes.name} >{row}</Typography>
-                      </Grid>
+                    <Grid item lg={10} onClick={() => handleSenderClick(row)}>
+                      <Typography className={classes.name}>{row}</Typography>
+                    </Grid>
                   </Grid>
                 </TableCell>
-            </TableRow>
-          ))}
+              </TableRow>
+            ))}
         </TableBody>
-        <TableFooter>
-        </TableFooter>
+        <TableFooter></TableFooter>
       </Table>
     </TableContainer>
   );

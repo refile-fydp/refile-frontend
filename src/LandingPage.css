@@ -1,237 +1,296 @@
 /* UTILITY*/
 
+.divider {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  border-left: 1px solid grey;
+}
+.refresh_icon {
+  margin: 10px;
+  float: right;
+  display: flex;
+  align-items: center;
+}
 
-.divider{
-    position:absolute;
-    left:50%;
-    top:10%;
-    bottom:10%;
-    border-left:1px solid grey;
+.refresh_text {
+  margin-right: 10px;
 }
-.refresh {
-    margin-top: 24px;
-    margin-right: 12px;
-    float: right;
+
+.refesh_button {
+  display: flex;
+  align-items: center;
+  border: 10px;
+  margin: 10px;
+  background-color: #f5f5f5;
 }
+
 /* ff */
 
-.flex_one{
-    flex:1
+.flex_one {
+  flex: 1;
 }
 
-
-.app{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 42px;
-    padding-bottom: 42px;
-
+.app {
+  position: absolute;
+  margin: 0px;
+  overflow: hidden;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
 }
 
-.app__main{
-    /*border-style: dotted; */
+.app__main {
+  display: flex;
+  position: relative;
+  float: right;
+  width: 69%;
+  padding-right: 2%;
 }
-
 
 /* HEADER SECTION*/
 
-.app__header{
-
-    /*border-style: dotted; */
+.app__header {
+  padding-left: 60px;
+  width: 23%;
+  border-right: 1px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-color: #efefef;
+  border-style: solid;
 }
 
-.header__container{
-    display:flex;
-    flex-direction:row;
+.header__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 1px;
+  border-top: 0px;
+  border-color: #efefef;
+  border-style: solid;
 }
 
-.header__title{
-    font-size: 20px;
-    font-weight: bold;
-
+.header__title {
+  font-family: "Proxima Nova";
+  font-size: 20px;
+  margin-left: 0px;
+  margin: 10px;
+  font-weight: bold;
+  float: left;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.header__subtitle{
-    font-size: 16px;
-    margin-left: 16px;
-
+.header__subtitle {
+  font-family: "Proxima Nova";
+  font-size: 16px;
+  margin: 10px;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.header__searchform{
-    float: left;
-    display:flex;
-    margin: 14px;
-    flex-direction:row;
+.header__searchform {
+  display: flex;
+  width: 40%;
+  background-color: #f5f5f5;
+  display: absolute;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
 }
-.header__searchform__input{
-    padding: 6px 16px;
-    min-width: 200px;
-    max-width: 100vw;
-    font-size: 14px;
-  }
 
-.header__searchform__submit{
-    margin-left: 16px;
-    margin-top: 10px;
-  }
-  
-.header__searchform__submit:hover{
-    margin-left: 16px;
-    margin-top: 10px;
+.header__searchform__input {
+  width: 90%;
+  font-size: 14px;
+  font-family: "Proxima Nova";
+  background-color: transparent;
+  border: none;
+  outline: none;
+  height: 6vh;
+  padding-left: 15px;
+}
 
-    color:  cornflowerblue;
-  }
-.header__search__icon__submit{
-    margin-top: 8px;
+.header__searchform__submit {
+  margin: 10px;
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__searchform__submit:hover {
+  margin-left: 16px;
+  margin-top: 10px;
+
+  color: cornflowerblue;
+}
+.header__search__icon__submit {
+  margin-top: 8px;
 }
 
 /*FOLDER SECTION*/
 
-.app__threads{
-    /*border-style: dotted; */
-    display: inline-block;
-    min-width: 300px;
-    max-width: 10%;
+.app__threads {
+  padding-left: 60px;
+  width: 20.7%;
+  float: left;
+  margin: none;
+  padding-right: 35px;
+  border-right: 1px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-color: #efefef;
+  border-style: solid;
 }
 
-.app__folder__title{
-    font-size: medium;
-    padding-left: 8px;
-    color: white;
-    padding: 4px;
-    background-color: gray;
+.app__folder__title {
+  font-family: "Proxima Nova";
+  font-size: medium;
+  padding-left: 8px;
+  color: white;
+  padding: 4px;
+  background-color: gray;
 }
 
-.app__folder__tools{
-    margin-left: 8px;
-    display:flex;
-    flex-direction:row;
+.app__folder__tools {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
 }
 
-.app__folder__list__items__container{
-    display:flex;
+.app__folder__list__items__container {
+  display: flex;
 
-    flex-direction:row;  
+  flex-direction: row;
 }
 
-.app__folder__add{
-    padding-left: 8px;
+.app__folder__add {
+  padding-left: 8px;
 }
-.app__folder__add__text{
-    padding-left: 8px;
-}
-
-.app__folder__list{
-    font-size:small;
-    font-weight: bold;
-    margin-left: 14px;
+.app__folder__add__text {
+  padding-left: 8px;
 }
 
-.app__folder__list__item__hover:hover{
-    font-size:small;
-    font-weight: bold;
-    padding-left: 8px;
-    color: cornflowerblue;
+.app__folder__list {
+  font-family: "Proxima Nova";
+  font-size: small;
+  font-weight: bold;
+  margin-left: 14px;
+}
+
+.app__folder__list__item__hover:hover {
+  font-family: "Proxima Nova";
+  font-size: small;
+  font-weight: bold;
+  padding-left: 8px;
+  color: cornflowerblue;
 }
 
 .app__folder__selected__title {
-    margin-left: 14px;
-    font-size: medium;
+  font-family: "Proxima Nova";
+  margin-left: 14px;
+  font-size: medium;
 }
 /*THREAD SECTION*/
 
-.app__thread__list{
-    font-weight: bold;
-    padding-left: 8px;
+.app__thread__list {
+  font-weight: bold;
+  padding-left: 8px;
 }
 
-.app__thread__list__item__hover:hover{
-    font-weight: bold;
-    color: cornflowerblue;
+.app__thread__list__item__hover:hover {
+  font-weight: bold;
+  color: cornflowerblue;
 }
 
 .app__thread__list__item {
-    display:inline-block;
-    position:sticky;
-    text-align: center;
-
+  display: inline-block;
+  position: sticky;
+  text-align: center;
 }
 
 .app__thread__list__item__name {
-    float:left;
-    font-size: small;
+  float: left;
+  font-size: small;
+  font-family: "Proxima Nova";
 }
 
 .app__thread__list__item__sender {
-    font-size: smaller;
-    font-weight:400;
-    float:left;
+  font-family: "Proxima Nova";
+  font-size: smaller;
+  font-weight: 400;
+  float: left;
 }
 
 .app__thread__list__item__date {
-    float:right;
-    font-size: small;
-
-    
+  float: right;
+  font-size: small;
+  font-family: "Proxima Nova";
 }
 
 /*ATTACHMENT SECTION*/
 
-.app__attachments{
-    /*border-style: dotted; */
-    float: right; 
-    max-width: 70%;
-    min-width: 65%;
+.app__attachments {
+  float: right;
 }
 
-.app__attachments__title{
-    font-size: 32px;
-    padding-left: 8px;
+.app__attachments__title {
+  font-family: "Proxima Nova";
+  font-size: 32px;
+  padding-left: 8px;
 }
 
-.app__attachments__quick__filters{
-    margin-left: 24px;
-    color: cornflowerblue;
+.app__attachments__quick__filters {
+  margin-left: 24px;
+  color: cornflowerblue;
 }
-.app__attachments__quick__filters:hover{
-    margin-left: 24px;
-    color: cornflowerblue;
-    font-weight: bold;
-}
-
-.app__attachments__quick__filters__list{
-    display: inline-flex;
-}  
-
-.app__attachments__quick__filters__list__title{
-    display: inline-block;
-    margin-left: 8px;
-
+.app__attachments__quick__filters:hover {
+  font-family: "Proxima Nova";
+  margin-left: 24px;
+  color: cornflowerblue;
+  font-weight: bold;
 }
 
+.app__attachments__quick__filters__list {
+  display: inline-flex;
+}
+
+.app__attachments__quick__filters__list__title {
+  display: inline-block;
+  margin-left: 8px;
+}
 
 /*TOOLBAR*/
 
-.app__toolbar__option__title{
-    display: inline-block;
-    font-size: large;
-    margin-left: 8px;
-
+.app__toolbar__option__title {
+  display: inline-block;
+  font-size: 24px;
+  font-family: "Proxima Nova";
+  margin-left: 8px;
+  margin-right: 10px;
 }
-.app__toolbar__option__title:hover{
-    display: inline-block;
-    font-size: large;
-    margin-left: 8px;
-    color: cornflowerblue;
+.app__toolbar__option__title:hover {
+  display: inline-block;
+  font-size: 24px;
+  font-family: "Proxima Nova";
+  margin-left: 8px;
+  color: cornflowerblue;
 }
 
-.app__toolbar__option__title:active{
-    display: inline-block;
-    font-size: large;
-    margin-left: 8px;
-    font-weight: bold;
-    color: black;
+.app__toolbar__option__title:active {
+  display: inline-block;
+  font-size: 24px;
+  font-family: "Proxima Nova";
+  margin-left: 8px;
+  font-weight: bold;
+  color: black;
 }
