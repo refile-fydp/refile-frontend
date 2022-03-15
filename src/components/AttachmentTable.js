@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Attachment } from "../models/Attachment";
+import * as FaIcons from "react-icons/fa";
 
 import {
   Table,
@@ -121,6 +122,7 @@ function AttachmentTable({ from, filter, attachments }) {
             <TableCell className={classes.tableHeaderCell}>Name</TableCell>
             <TableCell className={classes.tableHeaderCell}>Subject</TableCell>
             <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+            <TableCell className={classes.tableHeaderCell}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -137,11 +139,13 @@ function AttachmentTable({ from, filter, attachments }) {
                 <TableCell>
                   <Typography className={classes.name}>{row.thread}</Typography>
                 </TableCell>
-
                 <TableCell>
                   <Typography className={classes.name}>
                     {row.creation_date}
                   </Typography>
+                </TableCell>
+                <TableCell>
+                  <FaIcons.FaCloudDownloadAlt className="app__folder__list__cloud__icon"></FaIcons.FaCloudDownloadAlt>
                 </TableCell>
               </TableRow>
             ))}

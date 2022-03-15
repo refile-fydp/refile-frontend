@@ -52,9 +52,8 @@ function LandingPage() {
   const attachmentsForFolders = attachments.slice(0);
   const [searchTerm, setSearchTerm] = useState("");
 
-
   useEffect(() => getAttachments(), []);
-  
+
   useEffect(() => getThreadsCall(), []);
   useEffect(() => getSendersCall(), []);
 
@@ -66,10 +65,13 @@ function LandingPage() {
   useEffect(() => backFolder, [folderSelected]);
 
   function searchFiltering() {
-    global_attachments.current.filter(item => {
-      return Object.keys(item).some(key =>
-          item[key].toString().toLowerCase().includes(searchTerm.toString().toLowerCase())
-        ) 
+    global_attachments.current.filter((item) => {
+      return Object.keys(item).some((key) =>
+        item[key]
+          .toString()
+          .toLowerCase()
+          .includes(searchTerm.toString().toLowerCase())
+      );
     });
   }
   function addCategory(category) {
@@ -93,14 +95,14 @@ function LandingPage() {
     setUserInfo(userInfo);
   }
 
-  async function getThreadsCall(){
+  async function getThreadsCall() {
     var threads = await getThreadsApi();
-    setThreads(threads);  
+    setThreads(threads);
   }
 
-  async function getSendersCall(){
+  async function getSendersCall() {
     var senders = await getSendersApi();
-    setSenders(senders);  
+    setSenders(senders);
   }
 
   async function getAttachments() {
@@ -139,7 +141,7 @@ function LandingPage() {
       console.log("clicked on landing page was empty");
     } else {
       global_attachments.current.forEach((element) => {
-        console.log("hi: " + element)
+        console.log("hi: " + element);
         if (element.senderEmail == senderNameClicked) {
           filteredBySenderAttachments.push(element);
         }
@@ -221,8 +223,8 @@ function LandingPage() {
                 : "app__toolbar__option__title"
             }
             onClick={() => {
-              setAttachments(global_attachments.current)
-              setWorkspace("files")
+              setAttachments(global_attachments.current);
+              setWorkspace("files");
             }}
           >
             Files
@@ -235,24 +237,20 @@ function LandingPage() {
                 : "app__toolbar__option__title"
             }
             onClick={() => {
-              setWorkspace("folders")
+              setWorkspace("folders");
             }}
           >
             Categories
           </p>
           {workspace == "files" && (
-            <AttachmentTable from={"files"} attachments={global_attachments.current} />
+            <AttachmentTable
+              from={"files"}
+              attachments={global_attachments.current}
+            />
           )}
 
           {workspace == "folders" && (
             <div>
-              <div className="app__folder__tools">
-                <FaIcons.FaBackspace
-                  onClick={() => backFolder}
-                ></FaIcons.FaBackspace>
-                <AddNewFolder addCategory={addCategory} />
-              </div>
-
               <p className="app__folder__selected__title">{folderSelected}</p>
               {folderSelected && backFolderPressed ? (
                 <AttachmentTable

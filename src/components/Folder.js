@@ -1,17 +1,19 @@
 import React from "react";
 
-function Folder({setViewName, folder}) {
+function Folder({ setViewName, folder }) {
+  function something() {
+    console.log(folder);
+    setViewName(folder);
+  }
 
-    function something(){
-        console.log(folder);
-        setViewName(folder);
-    }
-
-    return (
-        <div className="app__folder__list__item__hover" onClick={() => setViewName(folder)}>
-            <p>{folder}</p>
-        </div>
-    );
+  return (
+    <div
+      className="app__folder__list__title"
+      onClick={() => setViewName(folder)}
+    >
+      <p className="app__folder__list__title">{folder}</p>
+    </div>
+  );
 }
 
 export default Folder;

@@ -44,10 +44,6 @@
 
 /* ff */
 
-.flex_one {
-  flex: 1;
-}
-
 .app {
   position: absolute;
   margin: 0px;
@@ -189,10 +185,105 @@
   flex-direction: row;
 }
 
-.app__folder__list__items__container {
-  display: flex;
+.app__folder__list {
+  font-family: "Inter";
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px;
+  width: 100%;
+}
 
+.app__folder__list__items__container {
   flex-direction: row;
+  height: 6vh;
+  width: 1050px;
+  border-radius: 4px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 1px;
+  border-top: 0px;
+  border-color: #efefef;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-right: 0px;
+  cursor: pointer;
+}
+
+.app__folder__list__items__container:hover {
+  flex-direction: row;
+  height: 6vh;
+  width: 1050px;
+  border-radius: 4px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 1px;
+  border-top: 0px;
+  border-color: #efefef;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-right: 0px;
+  cursor: pointer;
+  color: cornflowerblue;
+}
+
+.app__folder__list__items__text__container {
+  flex-direction: column;
+  height: 6vh;
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: left;
+  border: 10px;
+  margin: 10px;
+  margin-right: 0px;
+  cursor: pointer;
+}
+
+.app__folder__list__icon {
+  margin: 10px;
+  float: right;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  color: black;
+}
+
+.app__folder__list__cloud__icon {
+  float: right;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  color: black;
+}
+
+.app__folder__list__cloud__icon:hover {
+  float: right;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  color: cornflowerblue;
+}
+
+.app__folder__list__title {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  font-weight: 400;
+}
+
+.app__folder__list__attachment_number {
+  display: flex;
+  font-size: 14px;
+  margin: 0px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: #aaaaaa;
 }
 
 .app__folder__add {
@@ -202,25 +293,12 @@
   padding-left: 8px;
 }
 
-.app__folder__list {
-  font-family: "Inter";
-  font-size: small;
-  font-weight: bold;
-  margin-left: 14px;
-}
-
-.app__folder__list__item__hover:hover {
-  font-family: "Inter";
-  font-size: small;
-  font-weight: bold;
-  padding-left: 8px;
-  color: cornflowerblue;
-}
-
 .app__folder__selected__title {
   font-family: "Inter";
   margin-left: 14px;
-  font-size: medium;
+  font-size: 18px;
+  font-weight: 400;
+  width: 100%;
 }
 /*THREAD SECTION*/
 
