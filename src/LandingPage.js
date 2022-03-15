@@ -179,12 +179,23 @@ function LandingPage() {
             onClick={searchFiltering}
           ></FaIcons.FaSearch>
         </form>
-        <div className="refesh_button">
-          <FaIcons.FaRedo className="refresh_icon" onClick={refreshAttachments}>
+        <button
+          type="button"
+          className="refresh_button"
+          onClick={refreshAttachments}
+        >
+          <FaIcons.FaRedo className="refresh_icon">
             REFRESH ATTACHMENTS
           </FaIcons.FaRedo>
           <p className="refresh_text">Refresh</p>
-        </div>
+        </button>
+        <button type="button" className="refresh_button">
+          <FaIcons.FaPlusCircle className="refresh_icon"></FaIcons.FaPlusCircle>
+          <p className="refresh_text">Create New Category</p>
+        </button>
+        <button type="button" className="refresh_button">
+          <FaIcons.FaCog className="refresh_icon"></FaIcons.FaCog>
+        </button>
       </div>
       <div className="app__threads">
         <SenderTable
@@ -199,13 +210,22 @@ function LandingPage() {
       <div className="app__main">
         <div className="app__attachments">
           <p
-            className="app__toolbar__option__title"
+            className={
+              workspace === "files"
+                ? "app__toolbar__option__title_active"
+                : "app__toolbar__option__title"
+            }
             onClick={() => setWorkspace("files")}
           >
             Files
           </p>
+
           <p
-            className="app__toolbar__option__title"
+            className={
+              workspace === "folders"
+                ? "app__toolbar__option__title_active"
+                : "app__toolbar__option__title"
+            }
             onClick={() => setWorkspace("folders")}
           >
             Categories

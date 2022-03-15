@@ -23,29 +23,32 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   tableContainer: {
-    borderRadius: 0,
+    borderRadius: "4px",
     margin: "10px 10px",
     maxHeight: "45%",
     overflow: "auto",
   },
   tableHeaderCell: {
     fontWeight: "regular",
-    font: "Proxima Nova",
+    fontFamily: "Inter",
     backgroundColor: "white",
     color: "#888888",
   },
   avatar: {
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.getContrastText(theme.palette.primary.light),
+    justify: "center",
+    align: "center",
   },
   name: {
     fontWeight: "regular",
-    font: "Proxima Nova",
+    fontFamily: "Inter",
+    fontSize: "16px",
     color: "black",
     overflow: "hidden",
   },
   status: {
-    font: "Proxima Nova",
+    fontFamily: "Inter",
     fontWeight: "bold",
     fontSize: "0.75rem",
     color: "white",
@@ -110,6 +113,7 @@ function AttachmentTable({ from, filter, attachments }) {
       <Table stickyHeader className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell className={classes.tableHeaderCell}></TableCell>
             <TableCell className={classes.tableHeaderCell}>Name</TableCell>
             <TableCell className={classes.tableHeaderCell}>Subject</TableCell>
             <TableCell className={classes.tableHeaderCell}>Date</TableCell>
@@ -121,25 +125,19 @@ function AttachmentTable({ from, filter, attachments }) {
             .map((row) => (
               <TableRow key={row.name}>
                 <TableCell>
-                  <Grid container>
-                    <Grid item lg={2}>
-                      <Avatar
-                        alt={row.name}
-                        src="."
-                        className={classes.avatar}
-                      />
-                    </Grid>
-                    <Grid item lg={10}>
-                      <Typography className={classes.name}>
-                        {row.name}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  <Avatar alt={row.name} src="." className={classes.avatar} />
                 </TableCell>
-                <TableCell>{row.thread}</TableCell>
+                <TableCell>
+                  <Typography className={classes.name}>{row.name}</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography className={classes.name}>{row.thread}</Typography>
+                </TableCell>
 
                 <TableCell>
-                  <Typography>{row.creation_date}</Typography>
+                  <Typography className={classes.name}>
+                    {row.creation_date}
+                  </Typography>
                 </TableCell>
               </TableRow>
             ))}
