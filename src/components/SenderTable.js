@@ -87,7 +87,11 @@ function SenderTable({ senders, setSenderNameClicked }) {
   }, [senders]);
 
   return (
-    <TableContainer component={Paper} className={classes.tableContainer}>
+    <TableContainer
+      component={Paper}
+      className={classes.tableContainer}
+      elevation={0}
+    >
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>

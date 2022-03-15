@@ -9,11 +9,11 @@ function App() {
   const [activeCard, setActiveCard] = useState("FirstCard");
   return (
     <div className="global">
-      <nav>
+      {/* <nav>
         <Button variant="text" onClick={() => setActiveCard("FirstCard")}>
           Back
         </Button>
-      </nav>
+      </nav> */}
       <div>
         {activeCard === "FirstCard" && (
           <Login setActiveCard={setActiveCard}></Login>

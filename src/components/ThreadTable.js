@@ -96,7 +96,11 @@ function ThreadTable({ threads, setThreadNameClicked }) {
   }, [threads]);
 
   return (
-    <TableContainer component={Paper} className={classes.tableContainer}>
+    <TableContainer
+      component={Paper}
+      className={classes.tableContainer}
+      elevation={0}
+    >
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -119,7 +123,7 @@ function ThreadTable({ threads, setThreadNameClicked }) {
                         {row.name}
                       </Typography>
                       <Typography className={classes.name_subtitle}>
-                        {row.sender}
+                        {row.senderEmail}
                       </Typography>
                     </Grid>
                   </Grid>
