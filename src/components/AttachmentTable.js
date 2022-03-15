@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     justify: "center",
     align: "center",
   },
+  rowImage: {
+    width: 40,
+    height: 40
+  },
   name: {
     fontWeight: "regular",
     fontFamily: "Inter",
@@ -114,16 +118,18 @@ function AttachmentTable({ from, filter, attachments }) {
   function renderSwitch(param) {
     var result;
     console.log('result is fam: ' + param);
-    switch(param) {
-      case '.jpg':
-        result = '/src/images/volleyball.jpg';
-      case '.pdf':
-        result = '';
-      default:
-        result = '';
+
+    if (param == "pdf" || param == "PDF") {
+      result = "https://cdn-icons-png.flaticon.com/512/29/29587.png";
+    } else if (param == "jpg" || param == "jpeg" || param == "JPG") {
+      result = "https://cdn-icons-png.flaticon.com/512/29/29264.png";
+    } else if (param == "png" || param == "PNG") {
+      result = "https://cdn-icons-png.flaticon.com/512/29/29072.png";
+    } else {
+      result = "https://cdn-icons-png.flaticon.com/512/73/73384.png";
     }
 
-    return <img src={result}></img>
+    return <img className={classes.rowImage} src={result}></img>
 
   }
 
