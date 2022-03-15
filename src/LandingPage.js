@@ -67,7 +67,7 @@ function LandingPage() {
     setAttachments([]);
     var filteredBySearchAttachments = [];
 
-    if (searchTerm == "") {
+    if (searchTerm == "" || searchTerm == null) {
       setAttachments(global_attachments.current);
     } else {
       global_attachments.current.forEach((element) => {
