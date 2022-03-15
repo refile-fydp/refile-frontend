@@ -1,8 +1,8 @@
 export class Thread{
   
-    constructor(name, sender, creation_date) {
+    constructor(name, senderEmail, creation_date) {
       this.name = name;
-      this.sender = sender;
+      this.senderEmail = senderEmail;
       this.creation_date = formatDate(creation_date);
 
     }

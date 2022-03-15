@@ -77,7 +77,7 @@ function SenderTable({ senders, setSenderNameClicked }) {
   useEffect(() => {
     const tempArray = [];
     senders.forEach((sender) => {
-      tempArray.push(sender);
+      tempArray.push(sender.senderEmail);
     });
     setTableSender(tempArray);
   }, [senders]);

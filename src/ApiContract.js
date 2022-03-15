@@ -7,6 +7,7 @@ export function setUserId(userIdFromLogin){
     userId = userIdFromLogin;
 }
 
+
 export async function postNewCategories(categories) {
   console.log("categories are: " + categories);
   instance.patch('/users/' + userId, 
@@ -35,6 +36,30 @@ export async function getFirstAttachments() {
       })
     console.log(arraylist);
     return arraylist;
+}
+
+export async function getThreadsApi() {
+  const arraylist = [];
+
+  var result =  await instance.get('/threads/' + userId);
+  result.data.map((object) => {
+      console.log(object);
+      arraylist.push(object)
+    })
+  console.log(arraylist);
+  return arraylist;
+}
+
+export async function getSendersApi() {
+  const arraylist = [];
+
+  var result =  await instance.get('/senders/' + userId);
+  result.data.map((object) => {
+      console.log(object);
+      arraylist.push(object)
+    })
+  console.log(arraylist);
+  return arraylist;
 }
 
 export async function getSyncAttachments() {

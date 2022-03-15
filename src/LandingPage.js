@@ -8,6 +8,8 @@ import {
   getFirstAttachments,
   getUserInformation,
   postNewCategories,
+  getThreadsApi,
+  getSendersApi,
 } from "./ApiContract";
 import AddNewFolder from "./AddNewCategory";
 import AttachmentTable from "./components/AttachmentTable";
@@ -48,26 +50,26 @@ function LandingPage() {
   const attachmentsForFolders = attachments.slice(0);
   const [searchTerm, setSearchTerm] = useState("");
 
+
   useEffect(() => getAttachments(), []);
+  
+  useEffect(() => getThreadsCall(), []);
+  useEffect(() => getSendersCall(), []);
+
   useEffect(() => getUserInfo(), []);
   useEffect(() => threadClicked(), [threadNameClicked]);
   useEffect(() => senderClicked(), [senderNameClicked]);
-  useEffect(() => setThreadsFilter(), [attachments]);
-  useEffect(() => setSendersFilter(), [attachments]);
   useEffect(() => setFolderSelectedState(), [folderSelected]);
   useEffect(() => setCategoriesList(), [userInfo]);
   useEffect(() => backFolder, [folderSelected]);
 
   function searchFiltering() {
-    attachments.filter((val) => {
-      if (searchTerm == "") {
-        return val;
-      } else if (val.thread.toLowerCase().includes(searchTerm.toLowerCase)) {
-        return val;
-      }
+    attachments.filter(item => {
+      return Object.keys(item).some(key =>
+          item[key].toString().toLowerCase().includes(searchTerm.toString().toLowerCase())
+        ) 
     });
   }
-
   function addCategory(category) {
     var newList = categories;
     newList.push(category.name);
@@ -89,6 +91,16 @@ function LandingPage() {
     setUserInfo(userInfo);
   }
 
+  async function getThreadsCall(){
+    var threads = await getThreadsApi();
+    setThreads(threads);  
+  }
+
+  async function getSendersCall(){
+    var senders = await getSendersApi();
+    setSenders(senders);  
+  }
+
   async function getAttachments() {
     var attachments = await getFirstAttachments();
     setAttachments(attachments);
@@ -100,52 +112,10 @@ function LandingPage() {
     setAttachments(attachments);
   }
 
-  function setThreadsFilter() {
-    //get the 6 most recent threads based on date. do this by sorting attachments based on date propert
-    //then choose top 6, but in new array and return as
-    var removedDuplicateThreads = attachments.reduce((unique, o) => {
-      if (!unique.some((obj) => obj.thread === o.thread)) {
-        unique.push(o);
-      }
-      return unique;
-    }, []);
-    setThreads(removedDuplicateThreads);
-  }
-
-  function setSendersFilter() {
-    const myArray = [];
-    attachments.forEach((element) => {
-      myArray.push(element.sender);
-    });
-    var frequency = {},
-      value;
-    // compute frequencies of each value
-    for (var i = 0; i < myArray.length; i++) {
-      value = myArray[i];
-      if (value in frequency) {
-        frequency[value]++;
-      } else {
-        frequency[value] = 1;
-      }
-    }
-    // make array from the frequency object to de-duplicate
-    var uniques = [];
-    for (value in frequency) {
-      uniques.push(value);
-    }
-    // sort the uniques array in descending order by frequency
-    function compareFrequency(a, b) {
-      return frequency[b] - frequency[a];
-    }
-    uniques.sort(compareFrequency);
-    setSenders(uniques);
-  }
-
   function threadClicked() {
     var filteredByThreadAttachments = [];
 
     if (threadNameClicked == "") {
-      console.log("clicked on landing page was empty");
     } else {
       attachments.forEach((element) => {
         if (element.thread == threadNameClicked) {
@@ -165,8 +135,7 @@ function LandingPage() {
       console.log("clicked on landing page was empty");
     } else {
       attachments.forEach((element) => {
-        if (element.sender == senderNameClicked) {
-          console.log("element: " + element.thread);
+        if (element.senderEmail == senderNameClicked) {
           filteredBySenderAttachments.push(element);
         }
       });
@@ -207,6 +176,7 @@ function LandingPage() {
             className="header__searchform__submit"
             type="submit"
             value="Search"
+            onClick={searchFiltering}
           ></FaIcons.FaSearch>
         </form>
         <div className="refesh_button">

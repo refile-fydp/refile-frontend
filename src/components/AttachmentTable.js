@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   tableContainer: {
     borderRadius: 0,
     margin: "10px 10px",
-    maxHeight: "29%",
+    maxHeight: "45%",
     overflow: "auto",
   },
   tableHeaderCell: {
@@ -60,7 +60,7 @@ let entries = [];
 function AttachmentTable({ from, filter, attachments }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

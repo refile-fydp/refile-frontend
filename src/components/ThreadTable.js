@@ -78,7 +78,7 @@ function ThreadTable({ threads, setThreadNameClicked }) {
     const tempArray = [];
     threads.forEach((thread) => {
       tempArray.push(
-        new Thread(thread.thread, thread.sender, thread.createdDate)
+        new Thread(thread.thread, thread.senderEmail, thread.createdDate)
       );
     });
     setTableThread(tempArray);
