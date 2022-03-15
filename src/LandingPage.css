@@ -16,14 +16,30 @@
 
 .refresh_text {
   margin-right: 10px;
+  font-family: "Inter";
 }
 
-.refesh_button {
+.refresh_button {
+  height: 6vh;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   border: 10px;
   margin: 10px;
+  margin-right: 0px;
   background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.refresh_button:hover {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  border: 10px;
+  margin: 10px;
+  margin-right: 0px;
+  background-color: #d3d3d3;
+  cursor: pointer;
 }
 
 /* ff */
@@ -75,7 +91,7 @@
 }
 
 .header__title {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: 20px;
   margin-left: 0px;
   margin: 10px;
@@ -88,7 +104,7 @@
 }
 
 .header__subtitle {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: 16px;
   margin: 10px;
   height: 5vh;
@@ -98,6 +114,8 @@
 }
 
 .header__searchform {
+  height: 6vh;
+  border-radius: 4px;
   display: flex;
   width: 40%;
   background-color: #f5f5f5;
@@ -110,7 +128,7 @@
 .header__searchform__input {
   width: 90%;
   font-size: 14px;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   background-color: transparent;
   border: none;
   outline: none;
@@ -124,13 +142,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .header__searchform__submit:hover {
-  margin-left: 16px;
-  margin-top: 10px;
-
+  margin: 10px;
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: cornflowerblue;
+  cursor: pointer;
 }
 .header__search__icon__submit {
   margin-top: 8px;
@@ -153,7 +175,7 @@
 }
 
 .app__folder__title {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: medium;
   padding-left: 8px;
   color: white;
@@ -181,14 +203,14 @@
 }
 
 .app__folder__list {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: small;
   font-weight: bold;
   margin-left: 14px;
 }
 
 .app__folder__list__item__hover:hover {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: small;
   font-weight: bold;
   padding-left: 8px;
@@ -196,7 +218,7 @@
 }
 
 .app__folder__selected__title {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   margin-left: 14px;
   font-size: medium;
 }
@@ -221,11 +243,11 @@
 .app__thread__list__item__name {
   float: left;
   font-size: small;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
 }
 
 .app__thread__list__item__sender {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: smaller;
   font-weight: 400;
   float: left;
@@ -234,7 +256,7 @@
 .app__thread__list__item__date {
   float: right;
   font-size: small;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
 }
 
 /*ATTACHMENT SECTION*/
@@ -244,7 +266,7 @@
 }
 
 .app__attachments__title {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   font-size: 32px;
   padding-left: 8px;
 }
@@ -254,7 +276,7 @@
   color: cornflowerblue;
 }
 .app__attachments__quick__filters:hover {
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   margin-left: 24px;
   color: cornflowerblue;
   font-weight: bold;
@@ -274,23 +296,36 @@
 .app__toolbar__option__title {
   display: inline-block;
   font-size: 24px;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   margin-left: 8px;
   margin-right: 10px;
+  cursor: pointer;
 }
 .app__toolbar__option__title:hover {
   display: inline-block;
   font-size: 24px;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   margin-left: 8px;
   color: cornflowerblue;
+  cursor: pointer;
 }
 
-.app__toolbar__option__title:active {
+.app__toolbar__option__title_active {
   display: inline-block;
   font-size: 24px;
-  font-family: "Proxima Nova";
+  font-family: "Inter";
   margin-left: 8px;
   font-weight: bold;
   color: black;
+  cursor: pointer;
+}
+
+.app__toolbar__option__title_active:hover {
+  display: inline-block;
+  font-size: 24px;
+  font-family: "Inter";
+  margin-left: 8px;
+  font-weight: bold;
+  color: cornflowerblue;
+  cursor: pointer;
 }

@@ -20,12 +20,13 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
   },
   tableContainer: {
-    borderRadius: 0,
+    borderRadius: "4px",
     margin: "10px 10px",
     border: "none",
   },
   tableHeaderCell: {
     fontWeight: "regular",
+    fontFamily: "Inter",
     backgroundColor: "#F5F5F5",
     color: "black",
     border: "none",
@@ -33,12 +34,22 @@ const useStyles = makeStyles((theme) => ({
   tableRow: {
     "&:hover": {
       backgroundColor: "lightgrey",
+      cursor: "pointer",
     },
   },
   name: {
     overflow: "hidden",
     numberOfLines: 1,
-    fontSize: 13,
+    fontSize: 14,
+    fontFamily: "Inter",
+    color: "black",
+  },
+  name_subtitle: {
+    overflow: "hidden",
+    numberOfLines: 1,
+    fontSize: 12,
+    fontFamily: "Inter",
+    color: "#000000DE",
   },
   generic: {
     numberOfLines: 1,
@@ -107,7 +118,9 @@ function ThreadTable({ threads, setThreadNameClicked }) {
                       <Typography className={classes.name}>
                         {row.name}
                       </Typography>
-                      <Typography variant="body2">{row.sender}</Typography>
+                      <Typography className={classes.name_subtitle}>
+                        {row.sender}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </TableCell>

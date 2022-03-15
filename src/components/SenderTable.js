@@ -20,12 +20,13 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
   },
   tableContainer: {
-    borderRadius: 0,
+    borderRadius: "4px",
     margin: "10px 10px",
     border: "none",
   },
   tableHeaderCell: {
     fontWeight: "regular",
+    fontFamily: "Inter",
     backgroundColor: "#F5F5F5",
     color: "black",
     border: "none",
@@ -33,12 +34,15 @@ const useStyles = makeStyles((theme) => ({
   tableRow: {
     "&:hover": {
       backgroundColor: "lightgrey",
+      cursor: "pointer",
     },
   },
   name: {
     overflow: "hidden",
     numberOfLines: 1,
     fontSize: 13,
+    fontFamily: "Inter",
+    color: "black",
   },
   generic: {
     numberOfLines: 1,
