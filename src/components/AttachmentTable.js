@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   tableContainer: {
     borderRadius: "4px",
     margin: "10px 10px",
-    maxHeight: "45%",
+    maxHeight: "600px",
     overflow: "auto",
   },
   tableHeaderCell: {
