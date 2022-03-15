@@ -62,7 +62,6 @@ function LandingPage() {
   useEffect(() => setFolderSelectedState(), [folderSelected]);
   useEffect(() => setCategoriesList(), [userInfo]);
   useEffect(() => backFolder, [folderSelected]);
-
   function searchFiltering() {
     global_attachments.current.filter((item) => {
       return Object.keys(item).some((key) =>

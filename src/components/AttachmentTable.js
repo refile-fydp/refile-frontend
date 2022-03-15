@@ -87,7 +87,8 @@ function AttachmentTable({ from, filter, attachments }) {
             attachment.name,
             attachment.thread,
             attachment.sender,
-            attachment.createdDate
+            attachment.createdDate,
+            attachment.extension
           )
         );
       });
@@ -100,7 +101,8 @@ function AttachmentTable({ from, filter, attachments }) {
               attachment.name,
               attachment.thread,
               attachment.sender,
-              attachment.createdDate
+              attachment.createdDate,
+              attachment.extension
             )
           );
         }
@@ -108,6 +110,22 @@ function AttachmentTable({ from, filter, attachments }) {
     }
     setTableAttachment(tempArray);
   }, [attachments, from, filter]);
+
+  function renderSwitch(param) {
+    var result;
+    console.log('result is fam: ' + param);
+    switch(param) {
+      case '.jpg':
+        result = '/src/images/volleyball.jpg';
+      case '.pdf':
+        result = '';
+      default:
+        result = '';
+    }
+
+    return <img src={result}></img>
+
+  }
 
   return (
     <TableContainer
@@ -131,7 +149,9 @@ function AttachmentTable({ from, filter, attachments }) {
             .map((row) => (
               <TableRow key={row.name}>
                 <TableCell>
-                  <Avatar alt={row.name} src="." className={classes.avatar} />
+                  {
+                    renderSwitch(row.extension)                
+                  }
                 </TableCell>
                 <TableCell>
                   <Typography className={classes.name}>{row.name}</Typography>
