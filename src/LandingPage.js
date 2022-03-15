@@ -1,6 +1,6 @@
 import "./LandingPage.css";
 import * as FaIcons from "react-icons/fa";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import FolderList from "./components/FolderList";
 import ThreadList from "./components/ThreadList";
 import {
@@ -30,6 +30,8 @@ function LandingPage() {
     { name: "from past year" },
     { name: "pdf files" },
   ];
+
+  let global_attachments = useRef([]);
 
   const [workspace, setWorkspace] = useState("files");
   const [folderSelected, setFolderSelected] = useState();
@@ -64,7 +66,7 @@ function LandingPage() {
   useEffect(() => backFolder, [folderSelected]);
 
   function searchFiltering() {
-    attachments.filter(item => {
+    global_attachments.current.filter(item => {
       return Object.keys(item).some(key =>
           item[key].toString().toLowerCase().includes(searchTerm.toString().toLowerCase())
         ) 
@@ -103,6 +105,7 @@ function LandingPage() {
 
   async function getAttachments() {
     var attachments = await getFirstAttachments();
+    global_attachments.current = attachments;
     setAttachments(attachments);
   }
 
@@ -113,28 +116,30 @@ function LandingPage() {
   }
 
   function threadClicked() {
+    setAttachments([]);
     var filteredByThreadAttachments = [];
 
-    if (threadNameClicked == "") {
-    } else {
-      attachments.forEach((element) => {
-        if (element.thread == threadNameClicked) {
-          console.log("element: " + element.thread);
-          filteredByThreadAttachments.push(element);
-        }
-      });
-    }
+    global_attachments.current.forEach((element) => {
+      if (element.thread == threadNameClicked) {
+        console.log("element: " + element.thread);
+        filteredByThreadAttachments.push(element);
+      }
+    });
+
+    console.log("wtf: " + filteredByThreadAttachments);
 
     setAttachments(filteredByThreadAttachments);
   }
 
   function senderClicked() {
+    setAttachments([]);
     var filteredBySenderAttachments = [];
 
     if (senderNameClicked == "") {
       console.log("clicked on landing page was empty");
     } else {
-      attachments.forEach((element) => {
+      global_attachments.current.forEach((element) => {
+        console.log("hi: " + element)
         if (element.senderEmail == senderNameClicked) {
           filteredBySenderAttachments.push(element);
         }
@@ -215,7 +220,10 @@ function LandingPage() {
                 ? "app__toolbar__option__title_active"
                 : "app__toolbar__option__title"
             }
-            onClick={() => setWorkspace("files")}
+            onClick={() => {
+              setAttachments(global_attachments.current)
+              setWorkspace("files")
+            }}
           >
             Files
           </p>
@@ -226,12 +234,14 @@ function LandingPage() {
                 ? "app__toolbar__option__title_active"
                 : "app__toolbar__option__title"
             }
-            onClick={() => setWorkspace("folders")}
+            onClick={() => {
+              setWorkspace("folders")
+            }}
           >
             Categories
           </p>
           {workspace == "files" && (
-            <AttachmentTable from={"files"} attachments={attachments} />
+            <AttachmentTable from={"files"} attachments={global_attachments.current} />
           )}
 
           {workspace == "folders" && (
@@ -248,7 +258,7 @@ function LandingPage() {
                 <AttachmentTable
                   from={"folders"}
                   filter={folderSelected}
-                  attachments={attachmentsForFolders}
+                  attachments={global_attachments.current}
                 ></AttachmentTable>
               ) : (
                 <FolderList
