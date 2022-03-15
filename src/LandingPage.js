@@ -241,7 +241,7 @@ function LandingPage() {
             Categories
           </p>
           {workspace == "files" && (
-            <AttachmentTable from={"files"} attachments={global_attachments.current} />
+            <AttachmentTable from={"files"} attachments={attachments} />
           )}
 
           {workspace == "folders" && (
