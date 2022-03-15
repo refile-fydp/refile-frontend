@@ -238,6 +238,7 @@ function LandingPage() {
             }
             onClick={() => {
               setWorkspace("folders");
+              setBackFolderPressed(false);
             }}
           >
             Categories
