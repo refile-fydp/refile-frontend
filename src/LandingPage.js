@@ -67,18 +67,17 @@ function LandingPage() {
     setAttachments([]);
     var filteredBySearchAttachments = [];
 
-    if (searchTerm == "" || searchTerm == null) {
+    if (searchTerm == "" || searchTerm === null || searchTerm === undefined) {
       setAttachments(global_attachments.current);
     } else {
       global_attachments.current.forEach((element) => {
-        console.log("hi: " + element);
         if (element.name.toLowerCase().includes(searchTerm.toLowerCase()) || element.thread.toLowerCase().includes(searchTerm.toLowerCase())) {
           filteredBySearchAttachments.push(element);
         }
       });
-    }
 
-    setAttachments(filteredBySearchAttachments);
+      setAttachments(filteredBySearchAttachments);
+    }
   }
   function addCategory(category) {
     var newList = categories;
@@ -140,16 +139,12 @@ function LandingPage() {
     setAttachments([]);
     var filteredBySenderAttachments = [];
 
-    if (senderNameClicked == "") {
-      console.log("clicked on landing page was empty");
-    } else {
-      global_attachments.current.forEach((element) => {
-        console.log("hi: " + element);
-        if (element.senderEmail == senderNameClicked) {
-          filteredBySenderAttachments.push(element);
-        }
-      });
-    }
+    global_attachments.current.forEach((element) => {
+      console.log("hi: " + element);
+      if (element.senderEmail == senderNameClicked) {
+        filteredBySenderAttachments.push(element);
+      }
+    });
 
     setAttachments(filteredBySenderAttachments);
   }
