@@ -11,12 +11,11 @@ import {
   getThreadsApi,
   getSendersApi,
 } from "./ApiContract";
-import AddNewFolder from "./AddNewCategory";
 import AttachmentTable from "./components/AttachmentTable";
 import ThreadTable from "./components/ThreadTable";
 import SenderTable from "./components/SenderTable";
-import ReactSearchBox from "react-search-box";
 import _ from "lodash";
+import AddNewCategory from "./AddNewCategory";
 
 function LandingPage() {
   const threadPresetList = [
@@ -196,10 +195,7 @@ function LandingPage() {
           </FaIcons.FaRedo>
           <p className="refresh_text">Refresh</p>
         </button>
-        <button type="button" className="refresh_button">
-          <FaIcons.FaPlusCircle className="refresh_icon"></FaIcons.FaPlusCircle>
-          <p className="refresh_text">Create New Category</p>
-        </button>
+        <AddNewCategory addCategory={addCategory}></AddNewCategory>
         <button type="button" className="refresh_button">
           <FaIcons.FaCog className="refresh_icon"></FaIcons.FaCog>
         </button>

@@ -1,4 +1,6 @@
 import React from "react";
+import "./LandingPage.css";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -21,8 +23,11 @@ function AddNewCategory({addCategory}) {
     
     return (
         <div>
-            <FaIcons.FaFolderPlus className="app__folder__add" onClick={handleClickToOpen}>
-            </FaIcons.FaFolderPlus>
+           
+            <button type="button" className="refresh_button" onClick={handleClickToOpen}>
+                <FaIcons.FaPlusCircle className="refresh_icon"></FaIcons.FaPlusCircle>
+                <p className="refresh_text">Create New Category</p>
+            </button>
 
             <Dialog open={open} onClose={handleToClose}>
             <DialogTitle>{"Enter name of new folder"}</DialogTitle>
