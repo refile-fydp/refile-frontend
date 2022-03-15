@@ -50,7 +50,7 @@ function LandingPage() {
   const [userInfo, setUserInfo] = useState([]);
   const attachmentsForFolders = attachments.slice(0);
   const [searchTerm, setSearchTerm] = useState("");
-
+  
   useEffect(() => getAttachments(), []);
 
   useEffect(() => getThreadsCall(), []);
@@ -62,15 +62,23 @@ function LandingPage() {
   useEffect(() => setFolderSelectedState(), [folderSelected]);
   useEffect(() => setCategoriesList(), [userInfo]);
   useEffect(() => backFolder, [folderSelected]);
+  
   function searchFiltering() {
-    global_attachments.current.filter((item) => {
-      return Object.keys(item).some((key) =>
-        item[key]
-          .toString()
-          .toLowerCase()
-          .includes(searchTerm.toString().toLowerCase())
-      );
-    });
+    setAttachments([]);
+    var filteredBySearchAttachments = [];
+
+    if (searchTerm == "") {
+      setAttachments(global_attachments.current);
+    } else {
+      global_attachments.current.forEach((element) => {
+        console.log("hi: " + element);
+        if (element.name.toLowerCase().includes(searchTerm.toLowerCase()) || element.thread.toLowerCase().includes(searchTerm.toLowerCase())) {
+          filteredBySearchAttachments.push(element);
+        }
+      });
+    }
+
+    setAttachments(filteredBySearchAttachments);
   }
   function addCategory(category) {
     var newList = categories;
@@ -125,9 +133,6 @@ function LandingPage() {
         filteredByThreadAttachments.push(element);
       }
     });
-
-    console.log("wtf: " + filteredByThreadAttachments);
-
     setAttachments(filteredByThreadAttachments);
   }
 
@@ -168,7 +173,9 @@ function LandingPage() {
           <p className="header__title">Re:File</p>
           <p className="header__subtitle">{userInfo.email}</p>
         </div>
-        <form className="header__searchform">
+        <form className="header__searchform"
+              onSubmit={e => { e.preventDefault(); }}
+          >
           <input
             type="text"
             className="header__searchform__input"
