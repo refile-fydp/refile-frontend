@@ -98,7 +98,7 @@ function AttachmentTable({ from, filter, attachments }) {
       });
     } else if (from == "folders") {
       attachments.forEach((attachment) => {
-        if (filter == attachment.categories) {
+        if (attachment.categories.includes(filter)) {
           tempArray.push(
             new Attachment(
               attachment.id,
