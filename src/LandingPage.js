@@ -119,6 +119,7 @@ function LandingPage() {
   async function refreshAttachments() {
     setAttachments([]);
     var attachments = await getSyncAttachments();
+    global_attachments.current = attachments;
     setAttachments(attachments);
   }
 
